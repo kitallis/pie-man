@@ -1,0 +1,19 @@
+.Run bootdb.rb once to set up the initial database.
+> ruby bootdb.rb
+
+.Change settings in meta/config.yml as required.
+
+.Run pie-man.rb to start your bot.
+> ruby pie-man.rb
+.To stop loading certain plugins with the bot
+.specify in meta/config.yml
+
+.To add new features to bot, put your class inside the plugins/ directory
+.make use of the format:
+> module PieMan
+> 	class NewFeature
+>   end
+> end
+.for better separability.
+.Add a regex and other logic to support the new command inside filters.rb
+.and finally load the module inside pie-man.rb

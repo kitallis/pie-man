@@ -1,0 +1,18 @@
+COMMANDS :
+==========
+hi|hey|sup|yo ===> Make him greet you back.
+
+bye|ciao|chow ===> Bids you goodbye.
+
+random|randomize|speak|talk|Talk ===> Says something random from a heap of channel collected and/or pre-added text.
+
+thetime|time|date|TheTime|Time|Date ===> Returns the current date and time in IST.
+
+np <Last.fm usernick> ===> Posts the now playing/last played track scrobbled on Last.fm.
+
+rb <ruby expression> ===> a Ruby REPL.
+
+karma <object> ===> Posts the Karma of the object, logged by object++/-- (pie-man has a Karma tending to Infinity)
+
+help ===> This.
+==========

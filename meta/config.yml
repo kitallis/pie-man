@@ -1,0 +1,10 @@
+network: irc.freenode.net
+port: 6667
+channel: lolmanboi
+nick: godlykid
+user: k
+quit: nub
+# if true, appends sanitized chat from the channel into random.txt
+#log_in_markov: true
+
+
