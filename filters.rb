@@ -3,16 +3,16 @@ module PieMan
     def run
       until @socket.eof? do
         msg = @socket.gets
-   	    puts msg
-	
+        puts msg
+        
         if msg.match(/^PING :(.*)$/)
           say "PONG #{$~[1]}"
           next
         end
         
-	      username = msg.match(/:(.*)!/)
-	      hostname = msg.match(/!~(.*)\s[PRIVMSG]/)
-	      @query = username
+        username = msg.match(/:(.*)!/)
+        hostname = msg.match(/!~(.*)\s[PRIVMSG]/)
+        @query = username
 	
         def say_to_nick(msg)
   	      say "PRIVMSG #{@caller.to_s.delete(':!')} :#{msg}"
