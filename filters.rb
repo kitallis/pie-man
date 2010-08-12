@@ -34,7 +34,7 @@ module PieMan
           end
 
 	  	    # Creates a random string using the Markov module.
-	  	    if content.match('pie-man[,:] (random|randomize|speak|talk|Talk)')
+          if content.match('pie-man[,:] (random|randomize|speak|talk|Talk)')
             text = Markov.new('meta/random.txt')
             text.create_paragraph(1)
             say_to_chan(text.print_text.to_s.strip.delete("[]","()", ":").gsub(/\n/, '. '))
@@ -42,7 +42,7 @@ module PieMan
           end
 
           # Last.fm 'now playing' module.
-	  	    if content.strip.match('pie-man[,:] \bnp\s+([\w-]*)$') # notice the strip
+          if content.strip.match('pie-man[,:] \bnp\s+([\w-]*)$') # notice the strip
             user = $1
             lfm = LastDotFM.new(user, 'getrecenttracks').getLastTrack
             puts "caught " + user
@@ -54,7 +54,7 @@ module PieMan
           end
 
           # ruby eval module.
-	  	    if content.match('pie-man[,:] \brb\s+(.*)')
+          if content.match('pie-man[,:] \brb\s+(.*)')
             s = $1
             Thread.new do
               begin
@@ -75,7 +75,7 @@ module PieMan
           end
 
           # Karma module.
-	        if content.match('pie-man[,:] karma (.*)')
+          if content.match('pie-man[,:] karma (.*)')
             s = $1.strip
             say_to_chan("#{s}'s karma is #{Karma.new.read(s)}")
           end
@@ -95,8 +95,8 @@ module PieMan
               f2.write content.gsub(/\n/, ' ')
             end
           end
-
-	        if content.match('pie-man[,:] (help)')
+          
+          if content.match('pie-man[,:] (help)')
             say_to_chan('fuck you')
             File.open('meta/help.txt').each_line do |s|
             say_to_nick(s)
