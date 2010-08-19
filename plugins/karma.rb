@@ -5,7 +5,7 @@ module PieMan
 	
 	  def initialize()
 		  @rows = []
-		  @db = SQLite3::Database.new("pie-man.db")
+		  @db = SQLite3::Database.new("db/pie-man.db")
 	  end
 	  
     def read(object)
@@ -17,7 +17,7 @@ module PieMan
 	  end
 			
 	  def write(object, karma, hostname)
-		  unless object.nil? or object.empty? or host?(hostname)
+		  unless object.nil? or object.empty? #or host?(hostname)
 			  objVal = read(object).to_i
 			  karma == "++" ? objVal += 1 : objVal -= 1
 			  @db.execute("insert or replace into karma values ('#{object}', '#{objVal}', '#{hostname}');")

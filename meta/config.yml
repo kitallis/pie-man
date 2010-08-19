@@ -1,7 +1,7 @@
 network: irc.freenode.net
 port: 6667
 channel: lolmanboi
-nick: godlykid
+nick: pie-man
 user: k
 quit: nub
 # if true, appends sanitized chat from the channel into random.txt

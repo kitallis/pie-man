@@ -15,7 +15,7 @@ module PieMan
         @query = username
 	
         def say_to_nick(msg)
-          say "PRIVMSG #{@caller.to_s.delete(':!')} :#{msg}"
+          say "PRIVMSG #{@query.to_s.delete(':!')} :#{msg}"
         end
 	
         begin; if msg.match(/PRIVMSG ##{@channel} :(.*)$/)
@@ -25,11 +25,11 @@ module PieMan
           # The filters start from here
           # ---------------------------
           # ---------------------------
-          if content.match('pie-man[,:] (hi|hey|sup|yo)')
+          if content.strip.match('pie-man[,:] (hi|hey|sup|yo)$')
             say_to_chan('sup ' + username.to_s.delete(':'))
           end
           
-          if content.match('pie-man[,:] (bye|ciao|chow)')
+          if content.strip.match('pie-man[,:] (bye|ciao|chow)$')
             say_to_chan(username.to_s.delete(':!') + ', See ya in another life, brotha')
           end
 
@@ -81,7 +81,7 @@ module PieMan
           end
           
           if content.strip.match('(pie-man[:,])?(.*?)(\+\+|--)$')
-            Karma.new.write($2.strip, $3.strip, hostname)
+            Karma.new.write($2.strip, $3.strip, hostname, Time.now)
           end
 
           # Pushes out the environment time, user geolocations would be rad.
@@ -95,11 +95,21 @@ module PieMan
               f2.write content.gsub(/\n/, ' ')
             end
           end
-          
-          if content.match('pie-man[,:] (help)')
+
+          if content.strip.match('pie-man[,:] ud (.+)')
+            defin = Urban.define($1)[:defintions].to_a.flatten
+            unless defin.empty?
+              say_to_chan("%s: %s" % [defin[0], defin[1]])
+            else
+              say_to_chan("no definitions found")
+            end
+          end
+
+          if content.strip.match('pie-man[,:] the help$')
             say_to_chan('fuck you')
+            puts username
             File.open('meta/help.txt').each_line do |s|
-            say_to_nick(s)
+              say_to_nick(s)
             end
           end
 	        # ---------------------------

@@ -14,5 +14,7 @@ rb <ruby expression> ===> a Ruby REPL.
 
 karma <object> ===> Posts the Karma of the object, logged by object++/-- (pie-man has a Karma tending to Infinity)
 
+ud <word> ===> Query the topmost Urban Dictionary result.
+
 help ===> This.
 ==========
