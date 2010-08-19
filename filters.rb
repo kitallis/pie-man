@@ -61,8 +61,15 @@ module PieMan
                 timeout(5) do
                   $SAFE = 2
                   s.untaint
+                  puts "k"
                   outputStr = redirect { eval(s) } # helpers.rb
-                  outputStr.split("\n").each.first(4) { |x| say_to_chan(x) } # avoid flood
+                  evalput = outputStr.split("\n")
+                  puts evalput
+                  if evalput.size > 5
+                    evalput.first(4).each { |x| say_to_chan(x) } # avoid flood
+                  else
+                    evalput.each { |x| say_to_chan(x) }
+                  end
                 end
               rescue SecurityError
                 say_to_chan ("SECURITY BREACH.")

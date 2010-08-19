@@ -19,9 +19,7 @@ module PieMan
     end
   
     def say_to_chan(msg)
-      unless msg.lines.count > 4
-        say "PRIVMSG ##{@channel} :#{msg}"
-      end
+      say "PRIVMSG ##{@channel} :#{msg}"
     end
   
     def quit
