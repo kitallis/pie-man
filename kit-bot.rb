@@ -8,7 +8,7 @@ module PieMan
     	@name = name
 
     	say "NICK #{@nick}"
-    	say "USER kit-bots 0 * kit-bots"
+    	say "USER kit-bot 0 * kit-bot"
     	say "JOIN ##{@channel}"
     	say_to_chan "#{1.chr}ACTION does no wrong. #{1.chr}"
   	end
@@ -19,7 +19,9 @@ module PieMan
     end
   
     def say_to_chan(msg)
-      say "PRIVMSG ##{@channel} :#{msg}"
+      unless msg.lines.count > 4
+        say "PRIVMSG ##{@channel} :#{msg}"
+      end
     end
   
     def quit

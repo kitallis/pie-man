@@ -34,7 +34,7 @@ module PieMan
           end
 
 	  	    # Creates a random string using the Markov module.
-          if content.match('pie-man[,:] (random|randomize|speak|talk|Talk)')
+          if content.strip.match('pie-man[,:] (random|randomize|speak|talk|Talk)$')
             text = Markov.new('meta/random.txt')
             text.create_paragraph(1)
             say_to_chan(text.print_text.to_s.strip.delete("[]","()", ":").gsub(/\n/, '. '))
@@ -62,7 +62,7 @@ module PieMan
                   $SAFE = 2
                   s.untaint
                   outputStr = redirect { eval(s) } # helpers.rb
-                  outputStr.split("\n").each { |x| say_to_chan(x) }
+                  outputStr.split("\n").each.first(4) { |x| say_to_chan(x) } # avoid flood
                 end
               rescue SecurityError
                 say_to_chan ("SECURITY BREACH.")
@@ -85,7 +85,7 @@ module PieMan
           end
 
           # Pushes out the environment time, user geolocations would be rad.
-          if content.match('pie-man[,:] (thetime|time|date|TheTime|Time|Date)')
+          if content.strip.match('pie-man[,:] (thetime|time|date|TheTime|Time|Date)$')
             time = Time.now
             say_to_chan(time.strftime("%d/%m/%Y %H:%M:%S").to_s + ' IST')
           end
@@ -106,7 +106,7 @@ module PieMan
           end
 
           if content.strip.match('pie-man[,:] the help$')
-            say_to_chan('fuck you')
+            say_to_chan('bawg off you bastard')
             puts username
             File.open('meta/help.txt').each_line do |s|
               say_to_nick(s)
