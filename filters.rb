@@ -26,11 +26,11 @@ module PieMan
           # ---------------------------
           # ---------------------------
           if content.strip.match('pie-man[,:] (hi|hey|sup|yo)$')
-            say_to_chan('sup ' + username.to_s.delete(':'))
+            say_to_chan('sup')
           end
           
           if content.strip.match('pie-man[,:] (bye|ciao|chow)$')
-            say_to_chan(username.to_s.delete(':!') + ', See ya in another life, brotha')
+            say_to_chan('See ya in another life, brotha')
           end
 
 	  	    # Creates a random string using the Markov module.
