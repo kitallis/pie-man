@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pie-man by kitallis</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Pie-man</h1>
+        <p>an IRC bot that does no wrong</p>
+        <p class="view"><a href="https://github.com/kitallis/pie-man">View the Project on GitHub <small>kitallis/pie-man</small></a></p>
+        <ul>
+          <li><a href="https://github.com/kitallis/pie-man/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/kitallis/pie-man/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/kitallis/pie-man">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>.Run bootdb.rb once to set up the initial database.
+&gt; ruby bootdb.rb</p>
+
+<p>.Change settings in meta/config.yml as required.</p>
+
+<p>.Run pie-man.rb to start your bot.
+&gt; ruby pie-man.rb
+.To stop loading certain plugins with the bot
+.specify in meta/config.yml</p>
+
+<p>.To add new features to bot, put your class inside the plugins/ directory
+.make use of the format:
+&gt; module PieMan
+&gt; class NewFeature
+&gt; end
+&gt; end
+.for better separability.
+.Add a regex and other logic to support the new command inside filters.rb
+.and finally load the module inside pie-man.rb</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/kitallis">kitallis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
