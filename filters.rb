@@ -4,20 +4,20 @@ module PieMan
       until @socket.eof? do
         msg = @socket.gets
         puts msg
-        
+
         if msg.match(/^PING :(.*)$/)
           say "PONG #{$~[1]}"
           next
         end
-        
+
         username = msg.match(/:(.*)!/)
         hostname = msg.match(/!~(.*)\s[PRIVMSG]/)
         @query = username
-	
+
         def say_to_nick(msg)
           say "PRIVMSG #{@query.to_s.delete(':!')} :#{msg}"
         end
-	
+
         begin; if msg.match(/PRIVMSG ##{@channel} :(.*)$/)
           content = $~[1]
           # ---------------------------
@@ -28,7 +28,7 @@ module PieMan
           if content.strip.match('pie-man[,:] (hi|hey|sup|yo)$')
             say_to_chan('sup')
           end
-          
+
           if content.strip.match('pie-man[,:] (bye|ciao|chow)$')
             say_to_chan('See ya in another life, brotha')
           end
@@ -47,8 +47,8 @@ module PieMan
             lfm = LastDotFM.new(user, 'getrecenttracks').getLastTrack
             puts "caught " + user
             if lfm == ["","",""] or lfm.nil? or lfm.empty?
-              say_to_chan('bhut user? lol gtfo') 
-            else 
+              say_to_chan('bhut user? lol gtfo')
+            else
               say_to_chan("#{user} recently listened to #{lfm[0]} by #{lfm[1]}")
             end
           end
@@ -86,7 +86,7 @@ module PieMan
             s = $1.strip
             say_to_chan("#{s}'s karma is #{Karma.new.read(s)}")
           end
-          
+
           if content.strip.match('(pie-man[:,])?(.*?)(\+\+|--)$')
             Karma.new.write($2.strip, $3.strip, hostname, Time.now)
           end
@@ -96,7 +96,7 @@ module PieMan
             time = Time.now
             say_to_chan(time.strftime("%d/%m/%Y %H:%M:%S").to_s + ' IST')
           end
-          
+
           if content.match("^##{@nick}[:,]").nil?
             File.open('meta/random.txt', 'a') do |f2|
               f2.write content.gsub(/\n/, ' ')
@@ -112,7 +112,7 @@ module PieMan
             end
           end
 
-          if content.strip.match('pie-man[,:] the help$')
+          if content.strip.match('pie-man[,:] (the help|thehelp)$')
             say_to_chan('bawg off you bastard')
             puts username
             File.open('meta/help.txt').each_line do |s|
@@ -125,7 +125,7 @@ module PieMan
           # ---------------------------
           # ---------------------------
         end; rescue NameError => e
-          say_to_chan("Plugin/module deprecated, #{e}"); end  
+          say_to_chan("Plugin/module deprecated, #{e}"); end
       end
     end
   end

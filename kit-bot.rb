@@ -17,15 +17,14 @@ module PieMan
       puts msg
       @socket.puts msg
     end
-  
+
     def say_to_chan(msg)
       say "PRIVMSG ##{@channel} :#{msg}"
     end
-  
+
     def quit
       say "PART ##{@channel} :nub"
       say 'QUIT'
     end
-
   end
 end

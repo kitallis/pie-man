@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.dirname(__FILE__)
-module PieMan	
+module PieMan
 	%w[open3 socket singleton open-uri cgi pathname yaml net/https timeout fileutils csv rexml/document].map{|s| require s}
 	include REXML
 	# Load relevant plugins from here, make sure you add/un-add filters in filters.rb
@@ -14,7 +14,6 @@ module PieMan
 		bot.run
 		trap("INT"){ bot.quit }
 	end
-		
 end
 
 if __FILE__ == $0
