@@ -2,6 +2,10 @@ class String
   def wordwrap(len)
    	gsub( /\n/, "\n\n" ).gsub( /(.{1,#{len}})(\s+|$)/, "\\1\n" )
   end
+
+  def blank?
+    empty? || nil?
+  end
 end
 
 def redirect
