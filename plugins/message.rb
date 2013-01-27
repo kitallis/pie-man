@@ -2,18 +2,16 @@ class Message < Sequel::Model
   many_to_one :user
 
   class << self
-    # TODO: Also upsert the user for the author.
     def leave(attrs = {})
-        name = attrs[:name]
-        user = User.where(:name => name)
+      to = attrs[:to]
+      from = attrs[:from]
 
-        unless user
-          user = User.create(:name => name)
-        end
+      user = User.freate(to)
+      author = User.freate(from)
 
-        insert(:user_id => user.first.id,
-        :author => attrs[:author],
-        :content => attrs[:content])
+      insert(:user_id => user.id,
+      :author => author.name,
+      :content => attrs[:content])
     end
   end
 end
