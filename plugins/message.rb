@@ -38,13 +38,13 @@ module PieMan
       days, hours = hours.divmod(24)
 
       if days > 0
-        "%d days ago" % [days]
+        "%d day(s) ago" % [days]
       elsif hours > 0
-        "%d hours, %d minutes ago" % [hours, minutes]
+        "%d hour(s), %d minute(s) ago" % [hours, minutes]
       elsif minutes > 0
-        "%d minutes, %d seconds ago" % [minutes, seconds]
+        "%d minute(s), %d second(s) ago" % [minutes, seconds]
       else
-        "%d seconds ago" % [seconds]
+        "%d second(s) ago" % [seconds]
       end
     end
   end
