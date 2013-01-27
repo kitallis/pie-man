@@ -1,4 +1,4 @@
-COMMANDS :
+COMMANDS
 ==========
 hi|hey|sup|yo ===> Make him greet you back.
 
@@ -14,7 +14,9 @@ rb <ruby expression> ===> a Ruby REPL.
 
 -->|->|tell <nick> <message> ===> for leaving messages.
 
+karma <thing> ===> get karma of the object, increase/decrease by <thing>++ or <thing>--
+
 ud <word> ===> Query the topmost Urban Dictionary result.
 
-help ===> This.
+the help ===> This.
 ==========
