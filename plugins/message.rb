@@ -20,6 +20,7 @@ class Message < Sequel::Model
       user = User.freate(who)
       user.messages.inject([]) do |messages, message|
         messages << message.sanitize
+        message.delete
         messages
       end
     end
