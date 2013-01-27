@@ -2,8 +2,12 @@ $LOAD_PATH.unshift File.dirname(__FILE__)
 module PieMan
 	%w[open3 socket singleton open-uri cgi pathname yaml net/https timeout fileutils csv rexml/document].map{|s| require s}
 	include REXML
+
+  # Set and connect to the local database
+  DB = Sequel.connect("sqlite://pie-man.db")
+
 	# Load relevant plugins from here, make sure you add/un-add filters in filters.rb
-	%w[markov urbandict lastfm].map{|s| require "plugins/#{s}"}
+	%w[markov urbandict lastfm user messages].map{|s| require "plugins/#{s}"}
 	require 'helpers'
 	require 'kit-bot'
 	require 'filters'
