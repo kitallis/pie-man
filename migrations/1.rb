@@ -8,7 +8,7 @@ DB.create_table :users do
   primary_key :id
   String      :name, :size => 32, :null => false, :unique => true
   Boolean     :super, :default => false
-  Date        :created_at, :default => Time.now.utc
+  Time        :created_at, :default => Sequel::CURRENT_TIMESTAMP
 end
 puts "* Finished creating the User table."
 

@@ -8,7 +8,7 @@ DB.create_table :karma do
   primary_key :id
   foreign_key :user_id, :users
   Integer     :value, :default => 0
-  Date        :created_at, :default => Time.now.utc
+  Time        :created_at, :default => Sequel::CURRENT_TIMESTAMP
 end
 puts "* Finished creating the Karma table."
 

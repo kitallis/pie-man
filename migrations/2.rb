@@ -10,7 +10,7 @@ DB.create_table :messages do
   String      :author, :size => 32, :null => false
   String      :content, :text => true, :null => false
   Boolean     :protected, :default => false
-  Date        :created_at, :default => Time.now.utc
+  Time        :created_at, :default => Sequel::CURRENT_TIMESTAMP
 end
 puts "* Finished creating the Message table."
 

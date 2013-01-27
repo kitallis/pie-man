@@ -28,7 +28,24 @@ module PieMan
     end
 
     def sanitize
-      "#{author} said '#{content}' at #{created_at}"
+      "#{author} said '#{content}' #{pretty_time}"
+    end
+
+    def pretty_time
+      seconds = (Time.now.utc - created_at).to_i
+      minutes, seconds = seconds.divmod(60)
+      hours, minutes = minutes.divmod(60)
+      days, hours = hours.divmod(24)
+
+      if days > 0
+        "%d days ago" % [days]
+      elsif hours > 0
+        "%d hours, %d minutes ago" % [hours, minutes]
+      elsif minutes > 0
+        "%d minutes, %d seconds ago" % [minutes, seconds]
+      else
+        "%d seconds ago" % [seconds]
+      end
     end
   end
 
