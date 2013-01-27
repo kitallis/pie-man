@@ -1,5 +1,6 @@
 class User < Sequel::Model
   one_to_many :messages
+  one_to_one  :karma
 
   class << self
     def freate(name)
