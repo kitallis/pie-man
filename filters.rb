@@ -111,11 +111,19 @@ module PieMan
             end
           end
 
-          # Retrieve messages.
-          if content.match('pie-man[,:] give')
+          # Global observer for messages.
+          if content.match('(.*)')
             who = @query.to_s.delete(':!')
 
-            messages = Message.give(:who => who)
+            count = Message.messages(who)
+            say_to_chan("#{who}, you have #{count} unread message(s).") if count > 0
+          end
+
+          # Retrieve messages.
+          if content.strip.match('pie-man[,:] (give|messages)$')
+            who = @query.to_s.delete(':!')
+
+            messages = Message.give(who)
             say_to_chan("no messages for you.") if messages.empty?
             messages.each { |message| say_to_chan(message) }
           end
