@@ -83,6 +83,22 @@ module PieMan
             end
           end
 
+          # Give karma.
+          if content.strip.match('(pie-man[:,])?(.*?)(\+\+)$')
+            Karma.increment($2.strip)
+          end
+
+          # Take karma.
+          if content.strip.match('(pie-man[:,])?(.*?)(--)$')
+            Karma.decrement($2.strip)
+          end
+
+          # Retrieve karma.
+          if content.match('pie-man[,:] karma (.*)')
+            who = $1.strip
+            say_to_chan("#{who}'s karma is #{Karma.get(who)}")
+          end
+
           # Store messages.
           if content.match('pie-man[,:]\s(-->|->|tell)\s(\w*)\s(.*)$')
             to = $2.strip

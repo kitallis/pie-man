@@ -17,7 +17,8 @@ module PieMan
       end
 
       def update(name, value)
-        karma = User.freate(name).karma
+        user = User.freate(name)
+        karma = user.karma || create(:user_id => user.id)
         karma.update(:value => (karma.value + value))
       end
     end
