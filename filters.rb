@@ -10,7 +10,7 @@ module PieMan
           next
         end
 
-        username = msg.match(/:(.*)!/)
+        username = msg.match(/^:[^!]*/)
         hostname = msg.match(/!~(.*)\s[PRIVMSG]/)
         @query = username
 
@@ -18,7 +18,9 @@ module PieMan
           say "PRIVMSG #{@query.to_s.delete(':!')} :#{msg}"
         end
 
-        begin; if msg.match(/PRIVMSG ##{@channel} :(.*)$/)
+        begin
+
+        if msg.match(/PRIVMSG ##{@channel} :(.*)$/)
           content = $~[1]
           # ---------------------------
           # ---------------------------
@@ -81,20 +83,31 @@ module PieMan
             end
           end
 
-          # Karma module.
-          if content.match('pie-man[,:] karma (.*)')
-            s = $1.strip
-            say_to_chan("#{s}'s karma is #{Karma.new.read(s)}")
+          # Store messages.
+          if content.match('pie-man[,:]\s(-->|->|tell)\s(\w*)\s(.*)$')
+            to = $2.strip
+            from = @query.to_s.delete(':!')
+            content = $3.strip
+
+            unless (to.blank? || content.blank? || from.blank?)
+              Message.leave!(:to => to, :from => from, :content => content)
+              say_to_chan("ok #{from}, will tell #{to} that.")
+            end
           end
 
-          if content.strip.match('(pie-man[:,])?(.*?)(\+\+|--)$')
-            Karma.new.write($2.strip, $3.strip, hostname, Time.now)
+          # Retrieve messages.
+          if content.match('pie-man[,:] give')
+            who = @query.to_s.delete(':!')
+
+            messages = Message.give(:who => who)
+            say_to_chan("no messages for you.") if messages.empty?
+            messages.each { |message| say_to_chan(message) }
           end
 
-          # Pushes out the environment time, user geolocations would be rad.
+          # Prints the environment time, user geolocations would be rad.
           if content.strip.match('pie-man[,:] (thetime|time|date|TheTime|Time|Date)$')
-            time = Time.now
-            say_to_chan(time.strftime("%d/%m/%Y %H:%M:%S").to_s + ' IST')
+            time = Time.now.utc
+            say_to_chan(time.strftime("%d/%m/%Y %H:%M:%S").to_s + ' UTC')
           end
 
           if content.match("^##{@nick}[:,]").nil?
@@ -124,8 +137,11 @@ module PieMan
           # The filters end here
           # ---------------------------
           # ---------------------------
-        end; rescue NameError => e
-          say_to_chan("Plugin/module deprecated, #{e}"); end
+        end
+
+        rescue NameError => e
+          say_to_chan("Plugin/module deprecated, #{e}")
+        end
       end
     end
   end

@@ -7,7 +7,7 @@ module PieMan
 
     def create_paragraph(len)
       scan = Array.new(2,"\n")
-      @words = Array.new 
+      @words = Array.new
 
       flag = 0
       while @words.length <= len || flag == 0
@@ -18,16 +18,16 @@ module PieMan
         @words.push(word) if @words.length > 0 || flag == 1
         scan.push(word).shift
       end
-      
+
       @words.shift
     end
-  
+
     def print_text
       @words.join(" ").gsub(/[\"\(\)]/,"").wordwrap(68)
     end
-  
+
     private
-    
+
     def read_text(file)
       File.open(file) do |f|
         scan = Array.new(2,"\n")
@@ -37,16 +37,16 @@ module PieMan
             scan.push(w).shift
           end
         end
- 
+
       add_text(scan[0],scan[1], "\n")
       end
     end
-  
+
     def random_word(scan)
       index = rand(@text[scan[0]][scan[1]].length)
       @text[scan[0]][scan[1]][index]
     end
-  
+
     def add_text(a,b,c)
       if @text.key?(a)
         if @text[a].key?(b)
