@@ -2,7 +2,7 @@ class Message < Sequel::Model
   many_to_one :user
 
   class << self
-    def leave(attrs = {})
+    def leave!(attrs = {})
       to = attrs[:to]
       from = attrs[:from]
 
@@ -13,6 +13,20 @@ class Message < Sequel::Model
       :author => author.name,
       :content => attrs[:content])
     end
+
+    def give(attrs = {})
+      who = attrs[:who]
+
+      user = User.freate(who)
+      user.messages.inject([]) do |messages, message|
+        messages << message.sanitize
+        messages
+      end
+    end
+  end
+
+  def sanitize
+    "#{author} said '#{content}' at #{created_at}"
   end
 end
 
